@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "piexifjs": "^1.0.6",
     "vue": "^3.2.26",
     "vue-router": "^4.0.12"
   },
