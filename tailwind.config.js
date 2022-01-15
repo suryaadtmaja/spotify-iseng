@@ -6,14 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Playfair Display", ...defaultTheme.fontFamily.serif],
+        serif: ["Playfair Display", ...defaultTheme.fontFamily.serif],
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/line-clamp"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

@@ -1,7 +1,80 @@
 <template>
-  <div class="mx-auto w-full py-8">
-    <div class="flex flex-col items-center justify-center space-y-4">
-      <h3 class="text-4xl">Spotify Iseng</h3>
+  <div class="mx-auto w-full flex py-8 items-center justify-center">
+    <div class="w-full flex flex-col items-center justify-center space-y-4">
+      <div
+        v-if="loggedIn"
+        style="
+          width: 1080px;
+          height: 1920px;
+          background-color: #0b5563;
+          color: #edfafd;
+        "
+        ref="screenshotArea"
+        class="py-8 border border-gray-400 rounded border-opacity-25"
+      >
+        <div
+          v-if="profile"
+          class="profile mb-16 pt-20"
+          style="margin-left: 124px"
+        >
+          <h3 class="text-4xl font-semibold tracking-wide">
+            {{ profile.display_name }}
+          </h3>
+          <h3
+            class="text-xl font-light tracking-wide mt-4"
+            style="color: #c8f1f9"
+          >
+            Spotify Showcase
+          </h3>
+        </div>
+        <div
+          class="flex flex-col justify-center items-center space-y-16 w-full"
+        >
+          <div class="artists">
+            <h3 class="text-2xl mb-6 font-semibold tracking-wide">
+              Top Artists
+            </h3>
+            <div class="grid grid-cols-3 gap-x-8 gap-y-10">
+              <template v-for="(artist, index) in artists.items" :key="index">
+                <div class="flex flex-col">
+                  <img
+                    :src="artist.images[0].url"
+                    class="h-64 w-64 bg-cover rounded-lg mb-4 drop-shadow-lg"
+                  />
+                  <div class="flex flex-col space-y-1 tracking-wide">
+                    <h3 class="font-medium text-xl">{{ artist.name }}</h3>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <div class="tracks">
+            <h3 class="text-2xl mb-6 font-semibold tracking-wide">
+              Top Tracks
+            </h3>
+            <div class="grid grid-cols-3 gap-x-8 gap-y-10">
+              <template v-for="(song, index) in tracks.items" :key="index">
+                <div class="flex flex-col">
+                  <img
+                    :src="song.album.images[0].url"
+                    class="w-64 h-64 bg-cover rounded-lg mb-4 drop-shadow-lg"
+                  />
+                  <div class="flex flex-col space-y-1 tracking-wide">
+                    <h3 class="font-medium text-xl">
+                      {{ song.artists[0].name }}
+                    </h3>
+                    <h3 class="text-xs tracking-wider" style="color: #b6ecf7">
+                      {{ song.name }}
+                    </h3>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 class="text-2xl">Spotify Showcase</h3>
       <button
         v-if="!loggedIn"
         class="px-4 py-3 rounded text-base text-white hover:cursor-pointer bg-green-600 hover:bg-green-500"
@@ -24,53 +97,30 @@
           <h3>Login</h3>
         </div>
       </button>
-      <div class="flex flex-col space-y-10">
-        <div class="artists">
-          <h3 class="text-2xl mb-2 font-semibold tracking-wide">Top Artists</h3>
-          <div class="grid grid-cols-3 gap-6">
-            <template v-for="(artist, index) in artists.items" :key="index">
-              <div class="flex flex-col">
-                <img
-                  :src="artist.images[0].url"
-                  class="h-64 bg-cover rounded-lg mb-4 shadow-lg"
-                />
-                <div class="flex flex-col space-y-1 tracking-wide">
-                  <h3 class="font-medium text-xl">{{ artist.name }}</h3>
-                </div>
-              </div>
-            </template>
-          </div>
+      <button
+        v-if="loggedIn"
+        class="px-4 py-3 rounded text-base text-white hover:cursor-pointer bg-green-600 hover:bg-green-500"
+        @click="generateImage"
+      >
+        <div class="flex space-x-1">
+          <h3>Generate Image</h3>
         </div>
-        <div class="tracks">
-          <h3 class="text-2xl mb-2 font-semibold tracking-wide">Top Tracks</h3>
-          <div class="grid grid-cols-3 gap-6">
-            <template v-for="(song, index) in tracks.items" :key="index">
-              <div class="flex flex-col">
-                <img
-                  :src="song.album.images[0].url"
-                  class="h-64 bg-cover rounded-lg mb-4 shadow-lg"
-                />
-                <div class="flex flex-col space-y-1 tracking-wide">
-                  <h3 class="font-medium text-xl">
-                    {{ song.artists[0].name }}
-                  </h3>
-                  <h3 class="text-sm tracking-wider">{{ song.name }}</h3>
-                </div>
-              </div>
-            </template>
-          </div>
-        </div>
-      </div>
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { ref, onMounted } from "vue";
+import html2canvas from "html2canvas";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
+    const router = useRouter();
+    const screenshotArea = ref(null);
     const loggedIn = ref(false);
+    const profile = ref([]);
     const client_id = import.meta.env.VITE_CLIENT_ID;
     const redirect_uri = import.meta.env.VITE_REDIRECT_URL;
     const scope =
@@ -91,6 +141,24 @@ export default {
       return text;
     };
 
+    const generateImage = () => {
+      const captureArea = screenshotArea.value;
+      html2canvas(captureArea, {
+        allowTaint: true,
+        useCORS: true,
+        width: 1080,
+        height: 1920,
+        scale: 2,
+        removeContainer: true,
+      }).then((canvas) => {
+        const img = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = img;
+        link.download = "screenshot.png";
+        link.click();
+      });
+    };
+
     const login = () => {
       let state = generateRandomString(16);
       const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
@@ -106,6 +174,26 @@ export default {
         hashParams[e[1]] = decodeURIComponent(e[2]);
       }
       return hashParams;
+    };
+
+    const fetchProfile = async () => {
+      try {
+        const request = await fetch("https://api.spotify.com/v1/me", {
+          headers: {
+            Authorization: "Bearer " + getHashParams().access_token,
+          },
+        });
+        const data = await request.json();
+        profile.value = data;
+        if (request.status == 401) {
+          router.push("/");
+          loggedIn.value = false;
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     const fetchTopsong = async () => {
@@ -147,14 +235,19 @@ export default {
         localStorage.setItem("access_token", params.access_token);
         localStorage.setItem("refresh_token", params.refresh_token);
         loggedIn.value = true;
+        fetchProfile();
         fetchTopsong();
         fetchTopArtists();
       } else {
         loggedIn.value = false;
-        login();
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
       }
     });
     return {
+      screenshotArea,
+      profile,
+      generateImage,
       tracks,
       artists,
       loggedIn,

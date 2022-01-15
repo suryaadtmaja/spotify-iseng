@@ -59,32 +59,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@tailwindcss/aspect-ratio@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/aspect-ratio/-/aspect-ratio-0.4.0.tgz#c635dd7331cbcc1b111cebdc2647dd3493ebdd3e"
-  integrity sha512-WJu0I4PpqNPuutpaA9zDUq2JXR+lorZ7PbLcKNLmb6GL9/HLfC7w3CRsMhJF4BbYd/lkY6CfXOvkYpuGnZfkpQ==
-
-"@tailwindcss/forms@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.4.0.tgz#a46715e347a32d216a3973eb67473bd29ae3798e"
-  integrity sha512-DeaQBx6EgEeuZPQACvC+mKneJsD8am1uiJugjgQK1+/Vt+Ai0GpFBC2T2fqnUad71WgOxyrZPE6BG1VaI6YqfQ==
-  dependencies:
-    mini-svg-data-uri "^1.2.3"
-
 "@tailwindcss/line-clamp@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.3.0.tgz#bb342d7bdc11a6568dc6d2aacacd531b25eae7cf"
   integrity sha512-ffDDclrqr3sy8cpChCozedDUAN8enxqAiWeH8d4dGQ2hcXlxf51+7KleveFi/n/TxEuRVApoL7hICeDOdYPKpg==
-
-"@tailwindcss/typography@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.5.0.tgz#47886ec46ac41e1211d24fea05301046d9b30906"
-  integrity sha512-1p/3C6C+JJziS/ghtG8ACYalbA2SyLJY27Pm33cVTlAoY6VQ7zfm2H64cPxUMBkVIlWXTtWHhZcZJPobMRmQAA==
-  dependencies:
-    lodash.castarray "^4.4.0"
-    lodash.isplainobject "^4.0.6"
-    lodash.merge "^4.6.2"
-    lodash.uniq "^4.5.0"
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -254,6 +232,16 @@ autoprefixer@^10.4.2:
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
 
+base64-arraybuffer@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/base64-arraybuffer/-/base64-arraybuffer-0.2.0.tgz#4b944fac0191aa5907afe2d8c999ccc57ce80f45"
+  integrity sha512-7emyCsu1/xiBXgQZrscw/8KPRT44I4Yq9Pe6EGs3aPRTsWuggML1/1DTuZUuIaJPIm1FTDUVXl4x/yW8s0kQDQ==
+
+base64-arraybuffer@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/base64-arraybuffer/-/base64-arraybuffer-1.0.1.tgz#87bd13525626db4a9838e00a508c2b73efcf348c"
+  integrity sha512-vFIUq7FdLtjZMhATwDul5RZWv2jpXQ09Pd6jcVEOvIsqCWTRFD/ONHNfyOS8dA/Ippi5dsIgpyKWKZaAKZltbA==
+
 binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
@@ -358,6 +346,13 @@ cosmiconfig@^7.0.1:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+css-line-break@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/css-line-break/-/css-line-break-2.0.1.tgz#3dc74c2ed5eb64211480281932475790243e7338"
+  integrity sha512-gwKYIMUn7xodIcb346wgUhE2Dt5O1Kmrc16PWi8sL4FTfyDj8P5095rzH7+O8CTZudJr+uw2GCI/hwEkDJFI2w==
+  dependencies:
+    base64-arraybuffer "^0.2.0"
 
 cssesc@^3.0.0:
   version "3.0.0"
@@ -599,6 +594,14 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+html2canvas@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/html2canvas/-/html2canvas-1.4.0.tgz#e9db68a47486f2e884fea46b28a3a10f6c17b66f"
+  integrity sha512-vQMssxs2HvLuy7T0JrQqirRQxnhfB7KaHRSsQVV2WaNlXMqqhwv0gH+JUkkaWCednbDWZtRF7Msb/pbTkbcrpA==
+  dependencies:
+    css-line-break "2.0.1"
+    text-segmentation "^1.0.2"
+
 import-fresh@^3.2.1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.3.0.tgz#37162c25fcb9ebaa2e6e53d5b4d88ce17d9e0c2b"
@@ -663,26 +666,6 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-lodash.castarray@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/lodash.castarray/-/lodash.castarray-4.4.0.tgz#c02513515e309daddd4c24c60cfddcf5976d9115"
-  integrity sha1-wCUTUV4wna3dTCTGDP3c9ZdtkRU=
-
-lodash.isplainobject@^4.0.6:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
-  integrity sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
-
-lodash.merge@^4.6.2:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
-  integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
-
-lodash.uniq@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
-  integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
-
 magic-string@^0.25.7:
   version "0.25.7"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.7.tgz#3f497d6fd34c669c6798dcb821f2ef31f5445051"
@@ -702,11 +685,6 @@ micromatch@^4.0.4:
   dependencies:
     braces "^3.0.1"
     picomatch "^2.2.3"
-
-mini-svg-data-uri@^1.2.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/mini-svg-data-uri/-/mini-svg-data-uri-1.4.3.tgz#43177b2e93766ba338931a3e2a84a3dfd3a222b8"
-  integrity sha512-gSfqpMRC8IxghvMcxzzmMnWpXAChSA+vy4cia33RgerMS8Fex95akUyQZPbxJJmeBGiGmK7n/1OpUX8ksRjIdA==
 
 minimist@^1.1.1:
   version "1.2.5"
@@ -929,6 +907,13 @@ tailwindcss@^3.0.12:
     quick-lru "^5.1.1"
     resolve "^1.20.0"
 
+text-segmentation@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/text-segmentation/-/text-segmentation-1.0.2.tgz#1f828fa14aa101c114ded1bda35ba7dcc17c9858"
+  integrity sha512-uTqvLxdBrVnx/CFQOtnf8tfzSXFm+1Qxau7Xi54j4OPTZokuDOX8qncQzrg2G8ZicAMOM8TgzFAYTb+AqNO4Cw==
+  dependencies:
+    utrie "^1.0.1"
+
 to-regex-range@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/to-regex-range/-/to-regex-range-5.0.1.tgz#1648c44aae7c8d988a326018ed72f5b4dd0392e4"
@@ -940,6 +925,13 @@ util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+
+utrie@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/utrie/-/utrie-1.0.1.tgz#e155235ebcbddc89ae09261ab6e773ce61401b2f"
+  integrity sha512-JPaDXF3vzgZxfeEwutdGzlrNoVFL5UvZcbO6Qo9D4GoahrieUPoMU8GCpVpR7MQqcKhmShIh8VlbEN3PLM3EBg==
+  dependencies:
+    base64-arraybuffer "^1.0.1"
 
 vite@^2.7.10:
   version "2.7.10"
