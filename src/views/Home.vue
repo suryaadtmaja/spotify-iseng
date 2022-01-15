@@ -24,6 +24,43 @@
           <h3>Login</h3>
         </div>
       </button>
+      <div class="flex flex-col space-y-10">
+        <div class="artists">
+          <h3 class="text-2xl mb-2 font-semibold tracking-wide">Top Artists</h3>
+          <div class="grid grid-cols-3 gap-6">
+            <template v-for="(artist, index) in artists.items" :key="index">
+              <div class="flex flex-col">
+                <img
+                  :src="artist.images[0].url"
+                  class="h-64 bg-cover rounded-lg mb-4 shadow-lg"
+                />
+                <div class="flex flex-col space-y-1 tracking-wide">
+                  <h3 class="font-medium text-xl">{{ artist.name }}</h3>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <div class="tracks">
+          <h3 class="text-2xl mb-2 font-semibold tracking-wide">Top Tracks</h3>
+          <div class="grid grid-cols-3 gap-6">
+            <template v-for="(song, index) in tracks.items" :key="index">
+              <div class="flex flex-col">
+                <img
+                  :src="song.album.images[0].url"
+                  class="h-64 bg-cover rounded-lg mb-4 shadow-lg"
+                />
+                <div class="flex flex-col space-y-1 tracking-wide">
+                  <h3 class="font-medium text-xl">
+                    {{ song.artists[0].name }}
+                  </h3>
+                  <h3 class="text-sm tracking-wider">{{ song.name }}</h3>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,7 +74,10 @@ export default {
     const client_id = import.meta.env.VITE_CLIENT_ID;
     const redirect_uri = import.meta.env.VITE_REDIRECT_URL;
     const scope =
-      "user-read-private user-read-email user-library-read user-library-modify";
+      "user-read-private user-read-email user-library-read user-library-modify user-top-read";
+
+    const tracks = ref([]);
+    const artists = ref([]);
 
     const generateRandomString = (length) => {
       let text = "";
@@ -68,18 +108,55 @@ export default {
       return hashParams;
     };
 
+    const fetchTopsong = async () => {
+      try {
+        const request = await fetch(
+          "https://api.spotify.com/v1/me/top/tracks?limit=6",
+          {
+            headers: {
+              Authorization: "Bearer " + getHashParams().access_token,
+            },
+          }
+        );
+        const data = await request.json();
+        tracks.value = data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchTopArtists = async () => {
+      try {
+        const request = await fetch(
+          "https://api.spotify.com/v1/me/top/artists?limit=6",
+          {
+            headers: {
+              Authorization: "Bearer " + getHashParams().access_token,
+            },
+          }
+        );
+        const data = await request.json();
+        artists.value = data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     onMounted(() => {
       const params = getHashParams();
       if (params.access_token) {
         localStorage.setItem("access_token", params.access_token);
         localStorage.setItem("refresh_token", params.refresh_token);
         loggedIn.value = true;
+        fetchTopsong();
+        fetchTopArtists();
       } else {
         loggedIn.value = false;
         login();
       }
     });
     return {
+      tracks,
+      artists,
       loggedIn,
       login,
     };
