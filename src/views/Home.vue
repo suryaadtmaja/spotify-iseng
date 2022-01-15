@@ -123,8 +123,7 @@ export default {
     const profile = ref([]);
     const client_id = import.meta.env.VITE_CLIENT_ID;
     const redirect_uri = import.meta.env.VITE_REDIRECT_URL;
-    const scope =
-      "user-read-private user-read-email user-library-read user-library-modify user-top-read";
+    const scope = "user-read-private user-top-read";
 
     const tracks = ref([]);
     const artists = ref([]);
