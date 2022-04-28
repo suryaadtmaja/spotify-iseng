@@ -15,7 +15,7 @@
   "devDependencies": {
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "^1.0.5",
-    "@tailwindcss/line-clamp": "^0.3.0",
+    "@tailwindcss/line-clamp": "^0.4.0",
     "@types/tailwindcss": "^3.0.2",
     "@vitejs/plugin-vue": "^2.0.1",
     "autoprefixer": "^10.4.2",
