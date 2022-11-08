@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto w-full flex py-8 items-center justify-center">
+  <div class="mx-auto w-full flex py-8 items-center justify-center antialiased">
     <div class="w-full flex flex-col items-center justify-center space-y-4">
       <div
         v-if="loggedIn"
@@ -10,12 +10,13 @@
           color: #edfafd;
         "
         ref="screenshotArea"
-        class="py-8 border border-gray-400 rounded border-opacity-25"
+        class="py-8 border border-gray-400 rounded border-opacity-25 justify-center items-center flex"
       >
         <div
+          class="flex flex-col justify-center space-y-16 w-full px-24"
+        >
+        <div
           v-if="profile"
-          class="profile mb-16 pt-20"
-          style="margin-left: 124px"
         >
           <h3 class="text-4xl font-semibold tracking-wide">
             {{ profile.display_name }}
@@ -27,19 +28,16 @@
             Spotify Showcase
           </h3>
         </div>
-        <div
-          class="flex flex-col justify-center items-center space-y-16 w-full"
-        >
           <div class="artists">
             <h3 class="text-2xl mb-6 font-semibold tracking-wide">
               Top Artists
             </h3>
-            <div class="grid grid-cols-3 gap-x-8 gap-y-10">
+            <div class="grid grid-cols-3 gap-x-8 gap-y-10 w-full">
               <template v-for="(artist, index) in artists.items" :key="index">
-                <div class="flex flex-col">
+                <div class="flex flex-col py-1 max-w-[280px]">
                   <img
                     :src="artist.images[0].url"
-                    class="h-64 w-64 bg-cover rounded-lg mb-4 drop-shadow-lg"
+                    class="w-64 bg-cover rounded-lg mb-4 drop-shadow-lg"
                   />
                   <div class="flex flex-col space-y-1 tracking-wide">
                     <h3 class="font-medium text-xl">{{ artist.name }}</h3>
@@ -55,18 +53,19 @@
             </h3>
             <div class="grid grid-cols-3 gap-x-8 gap-y-10">
               <template v-for="(song, index) in tracks.items" :key="index">
-                <div class="flex flex-col">
+                <div class="flex flex-col py-1 max-w-[280px]">
+
                   <img
                     :src="song.album.images[0].url"
-                    class="w-64 h-64 bg-cover rounded-lg mb-4 drop-shadow-lg"
+                    class="w-64 bg-cover rounded-lg mb-4 drop-shadow-lg"
                   />
-                  <div class="flex flex-col space-y-1 tracking-wide">
+                  <div class="flex flex-col tracking-wide space-y-1">
                     <h3 class="font-medium text-xl">
                       {{ song.artists[0].name }}
                     </h3>
-                    <h3 class="text-xs tracking-wider" style="color: #b6ecf7">
+                    <p class="tracking-wide break-all text-sm font-medium" style="color: #b6ecf7;">
                       {{ song.name }}
-                    </h3>
+										</p>
                   </div>
                 </div>
               </template>
