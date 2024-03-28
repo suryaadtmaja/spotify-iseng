@@ -1,5 +1,8 @@
 # Spotify Iseng Project
 
+## note
+#### ***since spotify doesnt allow you to create or modify the album cover this project cannot be access if you trying to logged in to the website, in order to run this project was to create your own API key and used it
+
 Showing your spotify most played artists and tracks like a showcase portfolio and you can generated the image and upload it on your instagram stories.
 
 screenshot:
